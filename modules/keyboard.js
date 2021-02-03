@@ -78,6 +78,9 @@ class Keyboard extends Module {
       let bindings = (this.bindings[which] || []).filter(function(binding) {
         return Keyboard.match(evt, binding);
       });
+      if (evt.key === ":") {
+        bindings = (this.bindings[evt.key] || []).filter((binding) => binding.key === ':')
+      }
       if (bindings.length === 0) return;
       let range = this.quill.getSelection();
       if (range == null || !this.quill.hasFocus()) return;
@@ -135,7 +138,8 @@ Keyboard.keys = {
   UP: 38,
   RIGHT: 39,
   DOWN: 40,
-  DELETE: 46
+  DELETE: 46,
+  ":": ":"
 };
 
 Keyboard.DEFAULTS = {
